@@ -1,8 +1,21 @@
-var express = require('express');
+var express = require('express'),
+    baiDangRepository = require('../repositories/BaiDangRepository');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var BaiDang=[];
+  // get toan bo bai dang len mang BaiDang
+  baiDangRepository.getAllBaiDang.then(data => {
+        if (data.length > 0) {
+          for (var i in data) {
+            BaiDang.push(data[i]);
+          }
+        }
+    });
+  // Random chon 1 so bai trong bai dang lam bai viet noi bai, bai viet moi, bai viet xem nhieu.
+
+
   // get list bai viết từ database. Rồi chọn random ngẫu nhiên các bài theo yêu cầu: Nổi bật, Mới, Xem nhiều, Top chuyên mục
   var BDNoiBat = [
     {

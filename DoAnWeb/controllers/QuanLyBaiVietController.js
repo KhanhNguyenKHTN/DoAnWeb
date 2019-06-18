@@ -17,6 +17,7 @@ router.get('/tatcabaiviet', function (req, res, next) {
     //                             |
     //                             <a onclick="onRowClickDelete('{{id}}')"> Delete </a>
     //                         </td>
+    
     var baiViet = [{
         id: '1',
         titleBV: 'Test title1',

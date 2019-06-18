@@ -18,4 +18,9 @@ exports.getBaiDangById = baiDangId => {
     return data.load(sql);
 }
 
+exports.getAllBaiDang = () => {
+    var sql = `select * from bai_dang`;
+    return data.load(sql);
+}
+
 module.exports = router;

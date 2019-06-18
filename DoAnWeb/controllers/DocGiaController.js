@@ -1,9 +1,8 @@
 var express = require('express'),
-    docgiaRepository = require('../repositories/DocGiaRepository');
+    baiDangRepository = require('../repositories/BaiDangRepository');
 
 var router = express.Router();
 
-var docgiaRepository = require('../repositories/DocGiaRepository');
 
 router.get('/thongtinchitiet', function (req, res, next) {
     // lay account tu session ko lay theo id truyen vao

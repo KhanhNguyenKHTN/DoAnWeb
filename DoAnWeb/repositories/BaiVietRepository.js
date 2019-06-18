@@ -1,4 +1,5 @@
 var data = require('../connection/ConnectDatabase');
+var express = require('express');
 var router = express.Router();
 
 exports.createBaiViet = baiViet => {
@@ -7,8 +8,8 @@ exports.createBaiViet = baiViet => {
     return data.save(sql);
 }
 
-exports.getListBaiViet = baiDangId =>{
-    var sql = `select * from bai_viet where bai_dang_id = ${baiDangId}`;
+exports.getBaiVietById = id =>{
+    var sql = `select * from bai_viet where bai_dang_id = ${id}`;
     return data.load(sql);
 }
 
