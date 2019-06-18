@@ -6,7 +6,7 @@
     <h2>Đăng nhập thành công!</h2>
 </section>
 {{else }}
-<div>
+<div style="text-align: center;">
     {{#if errors }}
     <section class="errors">
         <ul>
@@ -36,13 +36,12 @@
                     khẩu</button></a>
         </div>
     </form>
+     <button type="submit" class="btn btn-primary" onclick="window.location.href=`http://localhost:8000/auth/fb`">Đăng nhập bằng facebook</button>
 </div>
 {{/if}}
 
-
-
 <hr>
-<div class="noti-center">
+<div class="noti-center" style="margin-top: 30px; margin-bottom:30px;">
     <h2>Nếu chưa có tài khoản, đăng ký ngay nào</h2>
 </div>
 
@@ -61,7 +60,13 @@
         </ul>
     </section>
     {{/if}}
-
+    <script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LdmXakUAAAAAIo1iryz5BksHN5Cci8pPDSo5bun'
+        });
+      };
+    </script>
 
     <form action="/taikhoan/dangky" method="post" name="registry">
     <div class="form-group input-login">
@@ -106,9 +111,15 @@
                 required="required">
         </div>
         <br>
+
+        <div id="html_element" style="padding-left: 25%;"></div>
+        <br>
         <button type="submit" class="btn btn-info" id="signup">Đăng ký</button>
     </div>
 </form>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
 </div>
 {{/if}}
 
