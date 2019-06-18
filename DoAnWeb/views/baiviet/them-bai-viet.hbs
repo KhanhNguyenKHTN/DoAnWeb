@@ -1,0 +1,154 @@
+<div class="col-md-9">
+    <style type="text/css">
+        img {
+            max-width: 600px;
+            max-height: 600px;
+        }
+
+        #content-of-news {
+            overflow-y: auto;
+            width: 100%;
+            height: 80vh;
+            background-color: #f1f1f1;
+            border: 1px black solid;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        .bold-text{
+            font-weight: bold;
+        }
+        .under-text {
+            text-decoration: underline;
+        }
+        .italic-text {
+            font-style: italic;
+        }
+    </style>
+    <script type="text/javascript">
+        var first = true;
+        function Pastefunc() {
+            var element = document.getElementById("content-of-news");
+            var splitHTML = element.innerHTML.split('<div>');
+            if (first) {
+                var newHTML = `<div>` + splitHTML[0] + `</div>`;
+                for (var i = 1; i < splitHTML.length; i++) {
+                    newHTML += `<div>` + splitHTML[i];
+                }
+                element.innerHTML = newHTML;
+            }
+            first = false;
+
+        }
+        function clickevent() {
+            console.log(window.getSelection());
+            window.getSelection().anchorNode.parentElement.style = "font-size: 30px;";
+        }
+        function clickpostbai() {
+            var element = document.getElementById("content-of-news");
+            document.getElementById("text-to-send").value = element.innerHTML;
+        }
+        function clickSelect() {
+            console.log("sadasd");
+            var value = document.getElementById('Select-font').value;
+            var node = window.getSelection().anchorNode;
+            var newStyle = "font-size: " + value + "px;";
+            if (node === null) {
+                document.getElementById("content-of-news").style = newStyle;
+            } else {
+                if (node.parentNode.parentNode.id === "content-of-news") {
+                    node.parentNode.style = newStyle;
+                } else {
+                    document.getElementById("content-of-news").style = newStyle;
+                }
+            }
+            console.log(value);
+        }
+        function LoadSelect() {
+            var sel = document.getElementById('Select-font');
+            for (var i = 10; i < 60; i += 2) {
+                sel.innerHTML += `<option onclick="clickSelect()" value="` + i + `">` + i + `</option>`;
+            }
+        }
+        function ClickBold() {
+            var node = window.getSelection().anchorNode;
+            if(node === null) return;
+            var isAdd = true;
+            var listClass = node.parentNode.parentNode.classList;
+            for(var i = 0; i<listClass.length; i++){
+                if(listClass[i] === "bold-text")
+                {
+                    listClass.remove("bold-text");
+                    return;
+                }
+            }
+            if(isAdd) {
+                node.parentNode.parentNode.classList.add("bold-text");
+            }
+        }
+        function ClickUnder() {
+            var node = window.getSelection().anchorNode;
+            if(node === null) return;
+            var isAdd = true;
+            var listClass = node.parentNode.parentNode.classList;
+            for(var i = 0; i<listClass.length; i++){
+                if(listClass[i] === "under-text")
+                {
+                    listClass.remove("under-text");
+                    return;
+                }
+            }
+            if(isAdd) {
+                node.parentNode.parentNode.classList.add("under-text");
+            }
+        }
+        function ClickItalic() {
+            var node = window.getSelection().anchorNode;
+            if(node === null) return;
+            var isAdd = true;
+            var listClass = node.parentNode.parentNode.classList;
+            for(var i = 0; i<listClass.length; i++){
+                if(listClass[i] === "italic-text")
+                {
+                    listClass.remove("italic-text");
+                    return;
+                }
+            }
+            if(isAdd) {
+                node.parentNode.parentNode.classList.add("italic-text");
+            }
+        }
+        window.onload = function () {
+            LoadSelect();
+            var element = document.getElementById("content-of-news");
+            element.addEventListener("paste", function (e) {
+                // cancel paste
+               // e.preventDefault();
+
+                // get text representation of clipboard
+                var text = (e.originalEvent || e).clipboardData.getData('text/plain');
+
+                // insert text manually
+                document.execCommand("insertHTML", false, text);
+            });
+        };
+    </script>
+    <div onload="LoadSelect()" style="display: inline-block;">
+        <div style="display: inline-block">
+            font-size:
+            <select onchange="clickSelect()" id="Select-font">
+            </select>
+        </div>
+        <div style="display: inline-block; margin-left: 50px;">
+            Font:
+            <button style="margin: 0 5px 0 5px; font-weight: bold;" onclick="ClickBold()">B</button>
+            <button style="margin: 0 5px 0 5px; text-decoration: underline;" onclick="ClickUnder()">U</button>
+            <button style="margin: 0 5px 0 5px; font-style: italic;" onclick="ClickItalic()">I</button>
+        </div>
+    </div>
+    <form style="margin: 0 0 10px 0; float: right;" action="/baiviet/them-bai-viet" method="POST">
+        <input type="hidden" id="text-to-send" name="content" value="" />
+        <button type="submit" class="btn btn-primary" onclick="clickpostbai()" id="login">Post</button>
+    </form>
+    <div oninput="Pastefunc()" contenteditable="true" id="content-of-news">
+    </div>
+</div>
