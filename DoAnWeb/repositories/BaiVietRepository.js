@@ -1,3 +1,4 @@
+var express = require('express');
 var data = require('../connection/ConnectDatabase');
 var router = express.Router();
 
@@ -11,5 +12,11 @@ exports.getListBaiViet = baiDangId =>{
     var sql = `select * from bai_viet where bai_dang_id = ${baiDangId}`;
     return data.load(sql);
 }
+function getListBaiViet(baiDangId) {
+    var sql = `select * from bai_viet where bai_dang_id = ` + baiDangId;
+    return data.load(sql);
+}
 
-module.exports = router;
+module.exports.getListBaiViet = getListBaiViet;
+
+//module.exports = router;
