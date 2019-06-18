@@ -16,7 +16,11 @@ function getListBaiViet(baiDangId) {
     var sql = `select * from bai_viet where bai_dang_id = ` + baiDangId;
     return data.load(sql);
 }
-
+function insertBaiViet(baiViet) {
+    var sql = `insert into bai_viet(bai_dang_id,noi_dung_bai_viet,action) 
+    values(${baiViet.bai_dang_id},'${baiViet.noi_dung_bai_viet}','${baiViet.action}')`;
+    return data.save(sql);
+}
 module.exports.getListBaiViet = getListBaiViet;
-
+module.exports.insertBaiViet = insertBaiViet;
 //module.exports = router;

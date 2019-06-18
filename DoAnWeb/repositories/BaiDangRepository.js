@@ -17,6 +17,14 @@ exports.getBaiDangById = baiDangId => {
     var sql = `select * from bai_dang where id = ${baiDangId}`;
     return data.load(sql);
 }
+function insertBD(baidang) {
+    var str = new Date();
+    var ngay = str.getFullYear() + "-" + (str.getMonth() < 10? ("0" + str.getMonth()): str.getMonth()) + "-" + str.getDate();
+    var sql =
+        `insert into bai_dang(chuyen_muc_id,nguoi_dung_id, tieu_de, ngay_dang, hinh_anh, noi_dung_tom_tat, luot_xem, tinh_trang)
+         values(${baidang.chuyen_muc_id}, ${baidang.nguoi_dung_id}, '${baidang.tieu_de}', '${ngay}' , '${baidang.hinh_anh}','${baidang.noi_dung_tom_tat}',${baidang.luot_xem}, 'preview'); `;
+    return data.save(sql);
+}
 function getBaiDangById(BaiDangId) {
     var sql = `select * from bai_dang where id = ` + BaiDangId;
     return data.load(sql);
@@ -41,6 +49,7 @@ function getTop3Week() {
     var query = "SELECT * FROM bai_dang WHERE tinh_trang ='Xuât bản' ORDER BY ngay_dang DESC, luot_xem ASC   LIMIT 3";
     return data.load(query);
 }
+module.exports.insertBD = insertBD;
 module.exports.getTop3Week = getTop3Week;
 module.exports.getTop10ChuyenMuc = getTop10ChuyenMuc;
 module.exports.getTopViewBaiViet = getTopViewBaiViet;

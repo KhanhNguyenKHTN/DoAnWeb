@@ -23,6 +23,10 @@
         .italic-text {
             font-style: italic;
         }
+        #avatar img {
+            max-width: 200px;
+            max-height: 100px;
+        }
     </style>
     <script type="text/javascript">
         var first = true;
@@ -44,11 +48,16 @@
             window.getSelection().anchorNode.parentElement.style = "font-size: 30px;";
         }
         function clickpostbai() {
-            var element = document.getElementById("content-of-news");
-            document.getElementById("text-to-send").value = element.innerHTML;
+            var element1 = document.getElementById("content-of-news");
+            var element2 = document.getElementById("tieu-de-input");
+            var element3 = document.getElementById("noi-dung-tt");
+            var element4 = document.getElementById("avatar");
+            document.getElementById("text-to-send").value = element1.innerHTML;
+            document.getElementById("tieu-de").value = element2.value;
+            document.getElementById("noi-dung-tom-tat").value = element3.value;
+            document.getElementById("hinh-anh").value = element4.innerHTML;
         }
         function clickSelect() {
-            console.log("sadasd");
             var value = document.getElementById('Select-font').value;
             var node = window.getSelection().anchorNode;
             var newStyle = "font-size: " + value + "px;";
@@ -61,7 +70,6 @@
                     document.getElementById("content-of-news").style = newStyle;
                 }
             }
-            console.log(value);
         }
         function LoadSelect() {
             var sel = document.getElementById('Select-font');
@@ -84,6 +92,9 @@
             if(isAdd) {
                 node.parentNode.parentNode.classList.add("bold-text");
             }
+        }
+        function SelectDM() {
+            document.getElementById('danh-muc-id').value = document.getElementById('Select-danh-muc').value;
         }
         function ClickUnder() {
             var node = window.getSelection().anchorNode;
@@ -132,6 +143,23 @@
             });
         };
     </script>
+        {{#if success }}
+<section class="success">
+    <h2>Thêm bài thành công!</h2>
+</section>
+{{else }}
+<div style="text-align: center;">
+    {{#if errors }}
+    <section class="errors">
+        <ul>
+            {{#each errors }}
+            <li>{{ this.msg }}</li>
+            {{/each}}
+        </ul>
+    </section>
+    {{/if}}
+</div>
+{{/if}}
     <div onload="LoadSelect()" style="display: inline-block;">
         <div style="display: inline-block">
             font-size:
@@ -145,10 +173,39 @@
             <button style="margin: 0 5px 0 5px; font-style: italic;" onclick="ClickItalic()">I</button>
         </div>
     </div>
-    <form style="margin: 0 0 10px 0; float: right;" action="/baiviet/them-bai-viet" method="POST">
+    <form style="margin: 0 0 50px 0; float: right;" action="/baiviet/them-bai-viet" method="POST">
         <input type="hidden" id="text-to-send" name="content" value="" />
+        <input type="hidden" id="tieu-de" name="tieu_de" value="" />
+        <input type="hidden" id="noi-dung-tom-tat" name="noi_dung_tom_tat" value="" />
+        <input type="hidden" id="hinh-anh" name="hinh_anh" value="" />
+        <input type="hidden" id="danh-muc-id" name="danh_muc_id" value="" />
         <button type="submit" class="btn btn-primary" onclick="clickpostbai()" id="login">Post</button>
     </form>
+    <div style="margin-top: 20px; margin-bottom: 20px;">
+        <input type="text" class="form-control" id="tieu-de-input" name="username" placeholder="Tiêu đề"
+                    required="required">
+        <textarea style="margin-top: 20px; height: 100px;" type="text" style="height: 100px; " class="form-control" id="noi-dung-tt" name="username" placeholder="Nội dung tóm tắt"
+                    required="required"></textarea>  
+        <div style="display: inline-block;">
+            <div style="display: inline-block;margin-top: 20px; margin-right: 10px; float:left;">
+                Hình ảnh:
+            </div>
+            <div  style="display: inline-block;border: lightgray 1px solid; height: 100px; min-width: 100px; margin-top: 20px;" id="avatar" contenteditable="true">
+
+            </div>  
+
+            <div style="display: inline-block;margin-top: 20px; margin-right: 10px; margin-left: 30px">
+                Danh Mục:
+            </div>
+            <select id="Select-danh-muc" onchange="SelectDM()">
+                {{#each DanhMuc}}
+                <option value="{{id}}">{{ten_chuyen_muc}}</option>
+                {{/each}}
+            </select>
+        </div>      
+        
+    </div>
+    
     <div oninput="Pastefunc()" contenteditable="true" id="content-of-news">
     </div>
 </div>
