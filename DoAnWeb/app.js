@@ -9,6 +9,8 @@ var hbs_Sec = require('express-handlebars-sections');
 var app = express();
 var session = require('express-session');
 var expressValidator = require('express-validator');
+var passport = require('passport');
+var passportfb = require('passport-facebook').Strategy;
 
 var BaiVietChiTiet = require('./controllers/BaiVietChiTiet');
 var taiKhoanController = require('./controllers/TaiKhoanController');
@@ -72,6 +74,35 @@ app.use(session({
 
 }))
 
+//use facebook passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/fb', passport.authenticate('facebook', {scope: ['email']}));
+app.get('/auth/fb/cb', passport.authenticate('facebook', {
+  failureRedirect:'http://localhost:8000/admin/nguoidung',
+  successRedirect:'http://localhost:8000/home'
+}));
+passport.use(new passportfb(
+  {
+    clientID: "420301202156006",
+    clientSecret: "44ba38733ab78d5280598746edb7187d",
+    callbackURL: "http://localhost:8000/auth/fb/cb",
+    profileFields: ['email', 'gender', 'locale', 'displayName']
+  },
+  (accessToken, refreshToken, profile, done)=> {
+    console.log(profile);
+    //thêm profile vào database
+    done(null, profile);
+
+  }
+));
+passport.serializeUser((user, done)=>{
+  done(null, user.id);
+});
+passport.deserializeUser((id, done)=>{
+  done(null, id);
+});
 // Express Validator
 app.use(expressValidator({
   errorFormatter: function (param, msg, value) {

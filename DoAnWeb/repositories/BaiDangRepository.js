@@ -14,8 +14,37 @@ exports.searchBaiDang = (tieu_de, noi_dung_tom_tat, tag, chuyen_muc) =>{
 }
 
 exports.getBaiDangById = baiDangId => {
-    var sql = `select * from bai_dang where bai_dang_id = ${baiDangId}`;
+    var sql = `select * from bai_dang where id = ${baiDangId}`;
     return data.load(sql);
 }
-
-module.exports = router;
+function getBaiDangById(BaiDangId) {
+    var sql = `select * from bai_dang where id = ` + BaiDangId;
+    return data.load(sql);
+}
+function getReference(chuyen_muc_id) {
+    var sql = `select * from bai_dang where chuyen_muc_id = ` + chuyen_muc_id;
+    return data.load(sql);
+}
+function getLastestBaiViet() {
+    var query = "SELECT * FROM bai_dang WHERE tinh_trang ='Xuât bản' ORDER BY  ngay_dang DESC LIMIT 10";
+    return data.load(query);
+}
+function getTopViewBaiViet() {
+    var query = "SELECT * FROM bai_dang WHERE tinh_trang ='Xuât bản' ORDER BY luot_xem  DESC LIMIT 10";
+    return data.load(query);
+}
+function getTop10ChuyenMuc() {
+    var query = "SELECT * FROM bai_dang WHERE tinh_trang ='Xuât bản'  GROUP BY chuyen_muc_id LIMIT 10";
+    return data.load(query);
+}
+function getTop3Week() {
+    var query = "SELECT * FROM bai_dang WHERE tinh_trang ='Xuât bản' ORDER BY ngay_dang DESC, luot_xem ASC   LIMIT 3";
+    return data.load(query);
+}
+module.exports.getTop3Week = getTop3Week;
+module.exports.getTop10ChuyenMuc = getTop10ChuyenMuc;
+module.exports.getTopViewBaiViet = getTopViewBaiViet;
+module.exports.getLastestBaiViet = getLastestBaiViet;
+module.exports.getBaiDangById = getBaiDangById;
+module.exports.getReference = getReference;
+//module.exports = router;

@@ -1,7 +1,7 @@
-﻿<h1 class="mt-4" id="title-bai-viet">{{BD.tieu_de}}</h1>
+﻿<h1 class="mt-4" id="title-bai-viet">{{BD.data.tieu_de}}</h1>
 
 <ul id="tags-bai-viet" class="list-inline list-unstyled">
-    <li><span><i class="glyphicon glyphicon-calendar"></i> {{BD.ngay_dang}} </span></li>
+    <li><span><i class="glyphicon glyphicon-calendar"></i> {{BD.data.ngay_dang}} </span></li>
     {{#each tagBD as |val key|}}
     <li> | </li>
     <span><i class="glyphicon glyphicon-tag"></i> {{val}} </span>
@@ -12,15 +12,15 @@
 <div class="content" id="content-bai viet">
     {{#each tpBV}}
      {{!-- neu thanh phan la anh --}}
-    {{#xif type "image"}}
+    {{#xif action "image"}}
         <img class="img-main my-4" id="image" src="{{noi_dung_bai_viet}}"><hr>
     {{/xif}}
 
-    {{#xif type "strong"}}
+    {{#xif action "strong"}}
         <p><strong>{{noi_dung_bai_viet}}</strong></p>
     {{/xif}}
 
-    {{#xif type "text"}}
+    {{#xif action "text"}}
         <p>{{noi_dung_bai_viet}}</p>
     {{/xif}}
     {{/each}}

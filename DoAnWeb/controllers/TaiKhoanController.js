@@ -52,6 +52,7 @@ router.post('/dangnhap', (req, res) => {
 /*------------------ DANG KY--------------------------*/
 router.post('/dangky', (req, res) => {
     //check duoi database
+    console.log(req.body);
     req.check('password','Mật khẩu không được để trống').notEmpty();
     var errors = req.validationErrors();
     if (errors) {
