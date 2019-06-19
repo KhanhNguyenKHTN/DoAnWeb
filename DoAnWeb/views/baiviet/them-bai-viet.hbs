@@ -52,10 +52,12 @@
             var element2 = document.getElementById("tieu-de-input");
             var element3 = document.getElementById("noi-dung-tt");
             var element4 = document.getElementById("avatar");
+            var element5 = document.getElementById("tag-input");
             document.getElementById("text-to-send").value = element1.innerHTML;
             document.getElementById("tieu-de").value = element2.value;
             document.getElementById("noi-dung-tom-tat").value = element3.value;
             document.getElementById("hinh-anh").value = element4.innerHTML;
+            document.getElementById("tag-content").value = element5.innerHTML;
         }
         function clickSelect() {
             var value = document.getElementById('Select-font').value;
@@ -179,6 +181,7 @@
         <input type="hidden" id="noi-dung-tom-tat" name="noi_dung_tom_tat" value="" />
         <input type="hidden" id="hinh-anh" name="hinh_anh" value="" />
         <input type="hidden" id="danh-muc-id" name="danh_muc_id" value="" />
+        <input type="hidden" id="tag-content" name="tag_content" value="" />
         <button type="submit" class="btn btn-primary" onclick="clickpostbai()" id="login">Post</button>
     </form>
     <div style="margin-top: 20px; margin-bottom: 20px;">
@@ -196,20 +199,20 @@
             
         </div>     
         </div>
-        <div style="display: inline-block; margin-top: 20px; margin-right: 20px;">
-            <div style="margin-right: 10px;">
-                Danh Mục:  <select id="Select-danh-muc" onchange="SelectDM()">
+        <div style="display: inline; margin-top: 20px;margin-bottom:20px; margin-right: 20px;">
+            <div style="margin-right: 10px;display: inline;">
+                Danh Mục:  <select id="Select-danh-muc" style="display: inline;" onchange="SelectDM()">
                 {{#each DanhMuc}}
                 <option value="{{id}}">{{ten_chuyen_muc}}</option>
                 {{/each}}
                 </select>
             </div>
-            <div style="display: inline-block;">
-                Tag: <input type="text" class="form-control" id="tag-input" name="tag" placeholder="nhập vào tag cách nhau dấu @"
+            <div style="display: inline;">
+                Tag: <input style="display: inline;width: auto;min-width: 300px;" type="text" class="form-control" id="tag-input" name="tag" placeholder="nhập vào tag cách nhau dấu @"
                     required="required">
             </div>
         </div>
     
-    <div oninput="Pastefunc()" contenteditable="true" id="content-of-news">
+    <div style="margin-top: 20px;" oninput="Pastefunc()" contenteditable="true" id="content-of-news">
     </div>
 </div>

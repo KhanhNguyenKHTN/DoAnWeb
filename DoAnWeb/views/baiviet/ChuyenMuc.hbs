@@ -1,0 +1,37 @@
+<div>
+                    <!-- tempffffffffffffffffffffffffffffffffffffffffffffffff -->
+                    {{#each BDNB}}
+                    <div class="well">
+                        <div class="media">
+                            <a class="pull-left" href="/bai-viet-chi-tiet/{{id}}">
+                                <img class="media-object" src="{{hinh_anh}}">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a
+                                        href="/bai-viet-chi-tiet/{{id}}">{{tieu_de}}
+                                        &nbsp
+                                        <span class="label label-danger pull-right">
+                                            <blink>HOT</blink>
+                                        </span>
+                                </h4></a>
+
+                                <!-- <p class="text-right">By Francisco</p> -->
+                                <p>{{noi_dung_tom_tat}}</p>
+
+
+                                <ul class="list-inline list-unstyled">
+                                    <li><span><i class="glyphicon glyphicon-calendar"></i> {{ngay_dang}} </span></li>
+                                    <li>|</li>
+                                    {{!-- <span><i class="glyphicon glyphicon-th-list"></i>Kinh doanh</span>
+                                    <li>|</li> --}}
+                                    <span><i class="glyphicon glyphicon-tag"></i><a href="#" style="color: black;">{{tags}}</a></span>
+                                    <li>|</li>
+
+                                    <span><i class="glyphicon glyphicon-eye-open"></i> 1.456</span>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>

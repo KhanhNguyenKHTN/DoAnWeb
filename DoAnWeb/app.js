@@ -19,6 +19,7 @@ var baivietController = require('./controllers/QuanLyBaiVietController');
 var home = require('./controllers/Home');
 var BaiVietChiTiet = require('./controllers/BaiVietChiTiet');
 var adminController = require('./controllers/AdminController');
+var danhmucController = require('./controllers/DanhMucController');
 
 // view engine setup
 app.engine('hbs', hbs({
@@ -42,6 +43,8 @@ app.use('/taikhoan', express.static(__dirname + '/public'));
 app.use('/docgia', express.static(__dirname + '/public'));
 app.use('/baiviet', express.static(__dirname + '/public'));
 app.use('/admin', express.static(__dirname + '/public'));
+app.use('/danhmuc',express.static(__dirname + '/public'));
+app.use('/home', express.static(__dirname + '/public'));
 // app.set('/bai-viet-chi-tiet/bai-viet/','/public/');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -65,6 +68,7 @@ app.use('/taikhoan', taiKhoanController);
 app.use('/docgia', docGiaController);
 app.use('/baiviet', baivietController);
 app.use('/admin', adminController);
+app.use('/danhmuc', danhmucController);
 
 // // session
 app.use(session({

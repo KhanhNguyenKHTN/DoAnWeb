@@ -326,9 +326,10 @@ router.post('/them-bai-viet', function (req, res, next) {
         console.log(anh);
         var BaiDang = {
             chuyen_muc_id: req.body.danh_muc_id,
-            nguoi_dung_id: 1, // sau lấy từ session
+            nguoi_dung_id: 2, // sau lấy từ session
             tieu_de: req.body.tieu_de,
             hinh_anh: anh,
+            tags: req.body.tag_content,
             noi_dung_tom_tat: req.body.noi_dung_tom_tat,
             luot_xem: 0,
             tinh_trang: "Preview"
@@ -362,11 +363,8 @@ router.post('/them-bai-viet', function (req, res, next) {
                 }
                 repBV.insertBaiViet(BaiViet).then();
             }
-            res.render('baiviet/them-bai-viet',
-                {
-                    layout: 'subLayout',
-                    displayDetail: 'true'
-            });
+            var url = `http://localhost:8000/bai-viet-chi-tiet/` + data.insertId;
+            res.redirect(url);
         });
         
     }
