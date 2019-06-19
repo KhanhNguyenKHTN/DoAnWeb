@@ -193,18 +193,22 @@
             <div  style="display: inline-block;border: lightgray 1px solid; height: 100px; min-width: 100px; margin-top: 20px;" id="avatar" contenteditable="true">
 
             </div>  
-
-            <div style="display: inline-block;margin-top: 20px; margin-right: 10px; margin-left: 30px">
-                Danh Mục:
-            </div>
-            <select id="Select-danh-muc" onchange="SelectDM()">
+            
+        </div>     
+        </div>
+        <div style="display: inline-block; margin-top: 20px; margin-right: 20px;">
+            <div style="margin-right: 10px;">
+                Danh Mục:  <select id="Select-danh-muc" onchange="SelectDM()">
                 {{#each DanhMuc}}
                 <option value="{{id}}">{{ten_chuyen_muc}}</option>
                 {{/each}}
-            </select>
-        </div>      
-        
-    </div>
+                </select>
+            </div>
+            <div style="display: inline-block;">
+                Tag: <input type="text" class="form-control" id="tag-input" name="tag" placeholder="nhập vào tag cách nhau dấu @"
+                    required="required">
+            </div>
+        </div>
     
     <div oninput="Pastefunc()" contenteditable="true" id="content-of-news">
     </div>
