@@ -41,6 +41,11 @@ function getTop3Week() {
     var query = "SELECT * FROM bai_dang WHERE tinh_trang ='Xuât bản' ORDER BY ngay_dang DESC, luot_xem ASC   LIMIT 3";
     return data.load(query);
 }
+function getDaDuyet() {
+    var query = "SELECT * FROM bai_dang WHERE tinh_trang ='Được duyệt'  LIMIT 10";
+    return data.load(query);
+}
+module.exports.getDaDuyet = getDaDuyet;
 module.exports.getTop3Week = getTop3Week;
 module.exports.getTop10ChuyenMuc = getTop10ChuyenMuc;
 module.exports.getTopViewBaiViet = getTopViewBaiViet;
