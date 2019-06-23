@@ -243,44 +243,47 @@ router.get('/baiviet', function (req, res, next) {
         data: {},
         tac_gia: ''
     };
+    console.log('aaaaaa');
     var baiVietDaPheDuyet = [];
     var BDXemNhieuNhat = [];
     var BDMoiNhat = [];
     var BDTopChuyenMuc = [];
-    repBaiDang.getDaDuyet().then((daDuyet) => {
-        for (var i = 0; i < daDuyet.length; i++) {
-            BaiDang.data = daDuyet[i];
-            console.log(BaiDang.data);
-            repUser.GetUserById(BaiDang.data.nguoi_dung_id).then((user) => {
-                BaiDang.tac_gia = user[0].ten_nguoi_dung;
-                console.log(BaiDang.tac_gia);
-            });
-        }
-        baiVietDaPheDuyet.push(BaiDang);
-        console.log(baiVietDaPheDuyet);
-    });
-
-
-
-    // var baiVietDaPheDuyet = [{
-    //     id: '1',
-    //     titleBV: 'Test title1',
-    //     tags: 'Nông sản',
-    //     author: 'Khánh',
-    //     date: '12/06/2019'
-    // }, {
-    //     id: '2',
-    //     titleBV: 'Test title2',
-    //     tags: 'Nông sản2',
-    //     author: 'Khánh',
-    //     date: '12/06/20192'
-    // }, {
-    //     id: '3',
-    //     titleBV: 'Test title3',
-    //     tags: 'Nông sản3',
-    //     author: 'Khánh',
-    //     date: '12/06/2019'
-    // }];
+    // repBaiDang.getDaDuyet().then((daDuyet) => {
+    //     for (var i = 0; i < daDuyet.length; i++) {
+    //         BaiDang.data = daDuyet[i];
+    //         console.log(BaiDang.data);
+    //         repUser.GetUserById(BaiDang.data.nguoi_dung_id).then((user) => {
+    //             BaiDang.tac_gia = user[0].ten_nguoi_dung;
+    //             console.log(BaiDang.tac_gia);
+    //         });
+    //     }
+    //     baiVietDaPheDuyet.push(BaiDang);
+    //     console.log(baiVietDaPheDuyet);
+    //     res.render('Admin/admin',
+    //     {
+    //         layout: 'subLayout',
+    //         displayDetail: 'false',
+    //         displayDashboard: 'true',
+    //         tagAdmin: 'BaiViet',
+    //         BaiVietDaDuyet: baiVietDaPheDuyet,
+    //         BaiVietLoaiBo: baiVietLoaiBo,
+    //         BaiVietChuaDuyet: baiVietChuaPheDuyet,
+    //         TableName: 'Tag bài viết'
+    //     });
+    // });
+    var baiVietDaPheDuyet = [{
+        id: '1',
+        titleBV: 'Testáe1',
+        tags: 'Nông sản',
+        author: 'Kha',
+        date: '12/06/2019'
+    }, {
+        id: '2',
+        titleBV: 'Tetitle2',
+        tags: 'Nôngsản2',
+        author: 'Khá',
+        date: '12/060192'
+    }];
     var baiVietChuaPheDuyet = [{
         id: '1',
         titleBV: 'Test title1',
@@ -319,6 +322,7 @@ router.get('/baiviet', function (req, res, next) {
         author: 'Khánh',
         date: '12/06/019'
     }];
+    console.log('â');
     res.render('Admin/admin',
         {
             layout: 'subLayout',

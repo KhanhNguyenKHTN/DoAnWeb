@@ -44,8 +44,9 @@ router.post('/dangnhap', (req, res) => {
                 console.log("chuc vu: 4");
             }
         });
-
-        res.render('taikhoan/login', { layout: 'subLayout', Page: 'dangnhap', success: true, errors: {} });
+        res.session.curUser = data;
+        res.redirect('http://localhost:8000/');
+        //res.render('taikhoan/login', { layout: 'subLayout', Page: 'dangnhap', success: true, errors: {} });
     }
 
 });
@@ -79,7 +80,7 @@ router.post('/dangky', (req, res) => {
                 };
                 taikhoanRepository.add(user).then(value => {
                     req.session.success = true;
-                    res.render('taikhoan/login', { layout: 'subLayout', Page: 'dangnhap', success1: true, errors1: {} });
+                    res.redirect('http://localhost:8000/');
                 });
             }
         });
